@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         int id = item.getItemId();
         if(id == R.id.nav_principal) {
-            PrincipalFragment principalFragment = new PrincipalFragment();
+            PrincipalFragment fr = new PrincipalFragment();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_content, principalFragment);
+            ft.replace(R.id.fragment_content, fr);
             ft.commit();
         } else if(id == R.id.nav_passe) {
             PasseFragment fr = new PasseFragment();
@@ -93,6 +93,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_content, fr);
             ft.commit();
+        } else if (id == R.id.nav_recarga) {
+            RecargaFragment fr = new RecargaFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_content, fr);
+            ft.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

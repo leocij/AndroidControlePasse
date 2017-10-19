@@ -24,13 +24,16 @@ class PasseDao {
     }
 
     public void insert(Passe passe) throws ParseException, java.text.ParseException {
-        String sql = "insert into passe (data, valor) values {?,?)";
+        String sql = "insert into passe (data, valor) values (?,?)";
         String dataStr = passe.getData();
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         java.util.Date d = sdf1.parse(dataStr);
         java.sql.Date dataSql = new java.sql.Date(d.getTime());
+        String valorStr = passe.getValor();
+        String valorNF = NumberFormat.getCurrencyInstance().parse(valorStr).toString();
+        BigDecimal valor = new BigDecimal(valorNF);
         Object bindArgs[] = new Object[]{
-                dataSql, new BigDecimal(Long.parseLong(String.valueOf(NumberFormat.getCurrencyInstance().parse(passe.getValor()))))
+                dataSql, valor
         };
         db.execSQL(sql, bindArgs);
     }
@@ -50,8 +53,9 @@ class PasseDao {
         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         java.util.Date d = sdf1.parse(dataStr);
         java.sql.Date dataSql = new java.sql.Date(d.getTime());
+        BigDecimal valor = new BigDecimal(Long.parseLong(String.valueOf(NumberFormat.getCurrencyInstance().parse(passe.getValor()))));
         Object bindArgs[] = new Object[]{
-                dataSql, new BigDecimal(Long.parseLong(String.valueOf(NumberFormat.getCurrencyInstance().parse(passe.getValor())))) , passe.getId()
+                dataSql, valor, passe.getId()
         };
         db.execSQL(sql, bindArgs);
     }

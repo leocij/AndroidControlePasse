@@ -68,6 +68,7 @@ public class EditaPasseFragment extends Fragment {
 
                     Passe passe = new Passe();
                     passe.setId(Integer.parseInt(getArguments().getString("id")));
+                    passe.setData(dataStr);
                     passe.setValor(valorStr);
 
                     passeDao.update(passe);

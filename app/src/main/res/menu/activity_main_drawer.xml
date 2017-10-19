@@ -9,6 +9,10 @@
         <item
             android:id="@+id/nav_passe"
             android:icon="@drawable/ic_menu_passe"
-            android:title="Entrada de Passes"/>
+            android:title="Detalhe dos Passes"/>
+        <item
+            android:id="@+id/nav_recarga"
+            android:icon="@drawable/ic_menu_recarga"
+            android:title="Recarga"/>
     </group>
 </menu>

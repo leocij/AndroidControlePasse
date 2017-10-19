@@ -9,6 +9,7 @@
     <string name="prompt_letra">Letra</string>
     <string name="prompt_numero">Número</string>
     <string name="prompt_descricao">Descrição</string>
+    <string name="prompt_quantidade">Quantidade</string>
     <string name="prompt_valor">Valor</string>
     <string name="action_salvar">Salvar</string>
     <string name="action_add_linha_onibus">Adiciona Linha de Ônibus</string>
