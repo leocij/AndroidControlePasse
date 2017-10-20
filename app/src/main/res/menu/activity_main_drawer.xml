@@ -14,5 +14,9 @@
             android:id="@+id/nav_recarga"
             android:icon="@drawable/ic_menu_recarga"
             android:title="Recarga"/>
+        <item
+            android:id="@+id/nav_historico_recarga"
+            android:icon="@drawable/ic_menu_historico_recarga"
+            android:title="" />
     </group>
 </menu>

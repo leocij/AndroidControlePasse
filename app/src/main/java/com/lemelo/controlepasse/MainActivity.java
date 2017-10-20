@@ -99,7 +99,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_content, fr);
             ft.commit();
-
+        } else if (id == R.id.nav_historico_recarga) {
+            HistoricoRecargaFragment fr = new HistoricoRecargaFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_content, fr);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

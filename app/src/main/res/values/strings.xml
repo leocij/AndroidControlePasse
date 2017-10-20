@@ -12,6 +12,7 @@
     <string name="prompt_quantidade">Quantidade</string>
     <string name="prompt_valor">Valor</string>
     <string name="action_salvar">Salvar</string>
+    <string name="action_historico_recarga">Histórico de Recargas</string>
     <string name="action_add_linha_onibus">Adiciona Linha de Ônibus</string>
 
     <string-array name="country_arrays">
