@@ -15,11 +15,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +40,8 @@ public class PrincipalFragment extends Fragment {
 
         view = inflater.inflate(R.layout.activity_principal, container, false);
         getActivity().setTitle("Tela Principal");
+
+        new MyKeyboard().hideKeyboard(getActivity(), view);
 
         //fecha teclado ao clicar
         ScrollView scrollView = (ScrollView) view.findViewById(R.id.scrollViewPrincipal);
@@ -74,12 +77,32 @@ public class PrincipalFragment extends Fragment {
             }
         });
 
-        imprime(view);
+        preencheSpinner(view);
+
+        valorPasse(view);
+
+
 
         return view;
     }
 
-    private void imprime(View view) {
+    private void valorPasse(View view) {
+        SQLiteDatabase db;
+        FabricaConexao fabrica = new FabricaConexao(getContext());
+        db = fabrica.getWritableDatabase();
+        RecargaDao recargaDao = new RecargaDao(db);
+        String valorPasse = recargaDao.getValorPasse();
+        if(valorPasse == null) {
+            valorPasse = "0";
+        }
+
+        final EditText txtValorPasse = (EditText) view.findViewById(R.id.txtValorPasse);
+        NumberFormat nfValorPasse = NumberFormat.getCurrencyInstance();
+        BigDecimal bdValorPasse = new BigDecimal(valorPasse);
+        txtValorPasse.setText(nfValorPasse.format(bdValorPasse));
+    }
+
+    private void preencheSpinner(View view) {
         final Spinner spiLinhaOnibus = (Spinner) view.findViewById(R.id.linhaOnibus);
 
         SQLiteDatabase db;
@@ -92,31 +115,6 @@ public class PrincipalFragment extends Fragment {
         ArrayAdapter<LinhaOnibus> linhaOnibusArrayAdapter = new ArrayAdapter<LinhaOnibus>(getActivity(), android.R.layout.simple_spinner_item, list);
         linhaOnibusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spiLinhaOnibus.setAdapter(linhaOnibusArrayAdapter);
-        spiLinhaOnibus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spiLinhaOnibus.getSelectedItemPosition();
-                Toast.makeText(getContext(),"You have selected item: " + list.get(index), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-    private void addItemsOnSpinner(View view) {
-        final Spinner spiLinhaOnibus = (Spinner) view.findViewById(R.id.linhaOnibus);
-        final List<String> list = new ArrayList<String>();
-        list.add("Linha de ônibus");
-        list.add("list 1");
-        list.add("list 2");
-        list.add("list 3");
-
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
-        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spiLinhaOnibus.setAdapter(stringArrayAdapter);
         spiLinhaOnibus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

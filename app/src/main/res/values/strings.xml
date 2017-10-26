@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="prompt_data">Data</string>
+    <string name="prompt_data_hora">Data</string>
     <string name="prompt_hora">Hora</string>
     <string name="prompt_linha_onibus">Linha de ônibus</string>
     <string name="prompt_letra">Letra</string>
@@ -11,6 +11,12 @@
     <string name="prompt_descricao">Descrição</string>
     <string name="prompt_quantidade">Quantidade</string>
     <string name="prompt_valor">Valor</string>
+    <string name="prompt_saldo">Saldo</string>
+    <string name="prompt_valorPasse">Valor do passe</string>
+    <string name="prompt_valorRecarga">Valor da recarga</string>
+    <string name="prompt_saldoAtual">Saldo Atual</string>
+    <string name="prompt_saldoFuturo">Saldo Futuro</string>
+    <string name="prompt_valorTotal">Valor Total</string>
     <string name="action_salvar">Salvar</string>
     <string name="action_historico_recarga">Histórico de Recargas</string>
     <string name="action_add_linha_onibus">Adiciona Linha de Ônibus</string>

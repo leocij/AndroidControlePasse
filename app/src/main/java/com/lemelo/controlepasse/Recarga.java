@@ -6,15 +6,16 @@ package com.lemelo.controlepasse;
 
 class Recarga {
     private Integer id;
-    private String data;
-    private String quantidade;
+    private String dataHora;
     private String valorPasse;
+    private String quantidade;
+    private String saldoAtual;
 
     public Recarga() {
         setId(id);
-        setData(data);
-        setQuantidade(quantidade);
+        setDataHora(dataHora);
         setValorPasse(valorPasse);
+        setQuantidade(quantidade);
     }
 
     public Integer getId() {
@@ -25,20 +26,12 @@ class Recarga {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
+    public String getDataHora() {
+        return dataHora;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
     }
 
     public String getValorPasse() {
@@ -49,10 +42,26 @@ class Recarga {
         this.valorPasse = valorPasse;
     }
 
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
+
     @Override
     public String toString() {
-        return "Data: " + data +
-                "Quantidade: " + quantidade +
-                "Valor do Passe: " + valorPasse;
+        return "Dt/Hr: " + dataHora +
+                "\nValor do Passe: " + valorPasse +
+                "\nQuantidade: " + quantidade;
+    }
+
+    public void setSaldoAtual(String saldoAtual) {
+        this.saldoAtual = saldoAtual;
+    }
+
+    public String getSaldoAtual() {
+        return saldoAtual;
     }
 }

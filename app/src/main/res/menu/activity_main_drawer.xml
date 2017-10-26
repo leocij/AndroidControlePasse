@@ -7,16 +7,12 @@
             android:icon="@drawable/ic_menu_principal"
             android:title="Tela Principal"/>
         <item
-            android:id="@+id/nav_passe"
-            android:icon="@drawable/ic_menu_passe"
-            android:title="Detalhe dos Passes"/>
-        <item
             android:id="@+id/nav_recarga"
             android:icon="@drawable/ic_menu_recarga"
             android:title="Recarga"/>
         <item
             android:id="@+id/nav_historico_recarga"
             android:icon="@drawable/ic_menu_historico_recarga"
-            android:title="" />
+            android:title="Histórico de Recarga" />
     </group>
 </menu>

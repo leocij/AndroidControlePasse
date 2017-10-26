@@ -14,6 +14,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,10 +33,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
+
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
+        ) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                //close keyboard
+                new MyKeyboard().hideKeyboard(MainActivity.this, getWindow().getDecorView());
+                Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
+            }
+        };
+
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -77,18 +91,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         //close keyboard
         new MyKeyboard().hideKeyboard(MainActivity.this, getWindow().getDecorView());
 
         int id = item.getItemId();
         if(id == R.id.nav_principal) {
             PrincipalFragment fr = new PrincipalFragment();
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_content, fr);
-            ft.commit();
-        } else if(id == R.id.nav_passe) {
-            PasseFragment fr = new PasseFragment();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_content, fr);

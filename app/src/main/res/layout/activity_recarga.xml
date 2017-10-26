@@ -6,7 +6,7 @@
     <ScrollView
         android:id="@+id/scrollViewRecarga"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="650dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,11 +18,34 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/txtData"
+                    android:id="@+id/txtSaldoAtual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_data"/>
+                    android:hint="@string/prompt_saldoAtual"
+                    android:inputType="numberDecimal" />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/txtDataHora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_data_hora" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/txtValorPasse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_valorPasse"
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -42,10 +65,10 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/txtValorPasse"
+                    android:id="@+id/txtValorRecarga"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_valor"
+                    android:hint="@string/prompt_valorRecarga"
                     android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
