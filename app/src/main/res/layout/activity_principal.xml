@@ -18,10 +18,11 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/txtData"
+                    android:id="@+id/txtSaldoAtual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_data_hora" />
+                    android:hint="@string/prompt_saldoAtual"
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -29,10 +30,10 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/txtHora"
+                    android:id="@+id/txtDataHora"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_hora" />
+                    android:hint="@string/prompt_data_hora" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -71,22 +72,20 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/txtSaldoAtual"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_saldoAtual" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
                     android:id="@+id/txtSaldoFuturo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_saldoFuturo" />
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnSalvar"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_salvar"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

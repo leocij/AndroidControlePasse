@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

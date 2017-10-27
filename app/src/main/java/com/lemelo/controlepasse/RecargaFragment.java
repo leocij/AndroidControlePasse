@@ -49,7 +49,7 @@ public class RecargaFragment extends Fragment {
 
         //Saldo atual
         final EditText txtSaldoAtual = (EditText) view.findViewById(R.id.txtSaldoAtual);
-        txtSaldoAtual.setText(saldoAtual(txtSaldoAtual));
+        txtSaldoAtual.setText(saldoAtual());
         txtSaldoAtual.setEnabled(false);
 
         //preenche data e hora
@@ -173,7 +173,7 @@ public class RecargaFragment extends Fragment {
         return view;
     }
 
-    private String saldoAtual(EditText txtSaldoAtual) {
+    private String saldoAtual() {
         SQLiteDatabase db;
         FabricaConexao fabrica = new FabricaConexao(getContext());
         db = fabrica.getWritableDatabase();
