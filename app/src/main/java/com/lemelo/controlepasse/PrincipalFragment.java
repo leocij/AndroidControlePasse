@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,16 +73,16 @@ public class PrincipalFragment extends Fragment {
             }
         });
 
-        preencheLinhaOnibus(view);
+        final String linhaOnibus = preencheLinhaOnibus(view);
 
         //Valor do passe
         final EditText txtValorPasse = (EditText) view.findViewById(R.id.txtValorPasse);
         txtValorPasse.setText(valorPasse());
 
-        String strSaltoAtual = txtSaldoAtual.getText().toString();
+        final String strSaldoAtual = txtSaldoAtual.getText().toString();
         String nfSaldoAtual = null;
         try {
-            nfSaldoAtual = NumberFormat.getCurrencyInstance().parse(strSaltoAtual).toString();
+            nfSaldoAtual = NumberFormat.getCurrencyInstance().parse(strSaldoAtual).toString();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -113,7 +112,20 @@ public class PrincipalFragment extends Fragment {
                 FabricaConexao fabrica = new FabricaConexao(getContext());
                 db = fabrica.getWritableDatabase();
 
-                PrincipaDao
+                PrincipalDao principalDao = new PrincipalDao(db);
+
+                Principal principal = new Principal();
+                principal.setSaldoAtual(txtSaldoAtual.getText().toString());
+                principal.setDataHora(txtDataHora.getText().toString());
+                principal.setLinhaOnibus(linhaOnibus);
+                principal.setValorPasse(txtValorPasse.getText().toString());
+                principal.setSaldoFuturo(txtSaldoFuturo.getText().toString());
+
+                try {
+                    principalDao.insert(principal);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -152,8 +164,9 @@ public class PrincipalFragment extends Fragment {
         return nfValorPasse.format(bdValorPasse);
     }
 
-    private void preencheLinhaOnibus(View view) {
+    private String preencheLinhaOnibus(View view) {
         final Spinner spiLinhaOnibus = (Spinner) view.findViewById(R.id.linhaOnibus);
+
 
         SQLiteDatabase db;
 
@@ -165,17 +178,28 @@ public class PrincipalFragment extends Fragment {
         ArrayAdapter<LinhaOnibus> linhaOnibusArrayAdapter = new ArrayAdapter<LinhaOnibus>(getActivity(), android.R.layout.simple_spinner_item, list);
         linhaOnibusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spiLinhaOnibus.setAdapter(linhaOnibusArrayAdapter);
-        spiLinhaOnibus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = spiLinhaOnibus.getSelectedItemPosition();
-                //Toast.makeText(getContext(),"You have selected item: " + list.get(index), Toast.LENGTH_LONG).show();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        System.out.println("----------> Erro: " + spiLinhaOnibus.getSelectedItemPosition());
 
-            }
-        });
+        if(spiLinhaOnibus.getSelectedItemPosition() >= 0) {
+            return spiLinhaOnibus.getSelectedItem().toString();
+        } else {
+            return "Lista de ônibus está vazia!";
+        }
+
+//        spiLinhaOnibus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                int index = spiLinhaOnibus.getSelectedItemPosition();
+//                linhaOnibus =  list.get(index);
+//                //Toast.makeText(getContext(),"You have selected item: " + list.get(index), Toast.LENGTH_LONG).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
     }
 }
