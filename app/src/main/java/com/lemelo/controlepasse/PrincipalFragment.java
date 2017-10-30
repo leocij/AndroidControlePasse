@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -78,6 +79,7 @@ public class PrincipalFragment extends Fragment {
         //Valor do passe
         final EditText txtValorPasse = (EditText) view.findViewById(R.id.txtValorPasse);
         txtValorPasse.setText(valorPasse());
+        txtValorPasse.setEnabled(false);
 
         final String strSaldoAtual = txtSaldoAtual.getText().toString();
         String nfSaldoAtual = null;
@@ -86,7 +88,7 @@ public class PrincipalFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        BigDecimal bdSaldoAtual = new BigDecimal(nfSaldoAtual);
+        final BigDecimal bdSaldoAtual = new BigDecimal(nfSaldoAtual);
 
         String strValorPasse = txtValorPasse.getText().toString();
         String nfValorPasse = null;
@@ -95,7 +97,7 @@ public class PrincipalFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        BigDecimal bdValorPasse = new BigDecimal(nfValorPasse);
+        final BigDecimal bdValorPasse = new BigDecimal(nfValorPasse);
 
         BigDecimal bdSaldoFuturo = bdSaldoAtual.subtract(bdValorPasse);
 
@@ -108,23 +110,43 @@ public class PrincipalFragment extends Fragment {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SQLiteDatabase db;
-                FabricaConexao fabrica = new FabricaConexao(getContext());
-                db = fabrica.getWritableDatabase();
 
-                PrincipalDao principalDao = new PrincipalDao(db);
-
-                Principal principal = new Principal();
-                principal.setSaldoAtual(txtSaldoAtual.getText().toString());
-                principal.setDataHora(txtDataHora.getText().toString());
-                principal.setLinhaOnibus(linhaOnibus);
-                principal.setValorPasse(txtValorPasse.getText().toString());
-                principal.setSaldoFuturo(txtSaldoFuturo.getText().toString());
-
+                String strValorPasse2 = txtValorPasse.getText().toString();
+                BigDecimal bdValorPasse2 = null;
                 try {
-                    principalDao.insert(principal);
+                    String nfValorPasse2 = NumberFormat.getCurrencyInstance().parse(strValorPasse2).toString();
+                    bdValorPasse2 = new BigDecimal(nfValorPasse2);
                 } catch (ParseException e) {
                     e.printStackTrace();
+                }
+
+                //Toast.makeText(getContext(), "Comparação: " + bdSaldoAtual.compareTo(bdValorPasse2) + " ValorPasse: " + bdValorPasse2, Toast.LENGTH_LONG).show();
+
+                if (bdSaldoAtual.compareTo(bdValorPasse2) == -1) {
+                    Toast.makeText(getContext(), "Saldo Atual não é suficiente!", Toast.LENGTH_LONG).show();
+                } else {
+                    SQLiteDatabase db;
+                    FabricaConexao fabrica = new FabricaConexao(getContext());
+                    db = fabrica.getWritableDatabase();
+
+                    PrincipalDao principalDao = new PrincipalDao(db);
+
+                    Principal principal = new Principal();
+                    principal.setSaldoAtual(txtSaldoAtual.getText().toString());
+                    principal.setDataHora(txtDataHora.getText().toString());
+                    principal.setLinhaOnibus(linhaOnibus);
+                    principal.setValorPasse(txtValorPasse.getText().toString());
+                    principal.setSaldoFuturo(txtSaldoFuturo.getText().toString());
+
+                    try {
+                        principalDao.insert(principal);
+
+                        Toast.makeText(getContext(), "Registro Salvo!", Toast.LENGTH_LONG).show();
+
+                        new MyRefresh().principalFragment(getActivity());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -179,7 +201,7 @@ public class PrincipalFragment extends Fragment {
         linhaOnibusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spiLinhaOnibus.setAdapter(linhaOnibusArrayAdapter);
 
-        System.out.println("----------> Erro: " + spiLinhaOnibus.getSelectedItemPosition());
+        //System.out.println("----------> Erro: " + spiLinhaOnibus.getSelectedItemPosition());
 
         if(spiLinhaOnibus.getSelectedItemPosition() >= 0) {
             return spiLinhaOnibus.getSelectedItem().toString();

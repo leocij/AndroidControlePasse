@@ -14,5 +14,10 @@
             android:id="@+id/nav_historico_recarga"
             android:icon="@drawable/ic_menu_historico_recarga"
             android:title="Histórico de Recarga" />
+        <item
+            android:id="@+id/nav_historico_passe"
+            android:icon="@drawable/ic_menu_historico_passe"
+            android:title="Histórico dos Passes"
+            />
     </group>
 </menu>

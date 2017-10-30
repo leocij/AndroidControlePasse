@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onDrawerOpened(drawerView);
                 //close keyboard
                 new MyKeyboard().hideKeyboard(MainActivity.this, getWindow().getDecorView());
-                Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Passei aqui!", Toast.LENGTH_LONG).show();
             }
         };
 
@@ -110,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.commit();
         } else if (id == R.id.nav_historico_recarga) {
             HistoricoRecargaFragment fr = new HistoricoRecargaFragment();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_content, fr);
+            ft.commit();
+        } else if(id == R.id.nav_historico_passe) {
+            HistoricoPasseFragment fr = new HistoricoPasseFragment();
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_content, fr);

@@ -74,13 +74,10 @@ class Principal {
 
     @Override
     public String toString() {
-        return "Principal{" +
-                "id=" + id +
-                ", saldoAtual='" + saldoAtual + '\'' +
-                ", dataHora='" + dataHora + '\'' +
-                ", linhaOnibus='" + linhaOnibus + '\'' +
-                ", valorPasse='" + valorPasse + '\'' +
-                ", saldoFuturo='" + saldoFuturo + '\'' +
-                '}';
+        return "Saldo Atual: " + saldoAtual +
+                "\nDt/Hr: " + dataHora +
+                "\nLinha de Onibus: " + linhaOnibus +
+                "\nValor do Passe: " + valorPasse +
+                "\nSaldo Futuro: " + saldoFuturo;
     }
 }

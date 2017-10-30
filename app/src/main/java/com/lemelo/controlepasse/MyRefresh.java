@@ -16,4 +16,12 @@ class MyRefresh {
         ft.replace(R.id.fragment_content, fr);
         ft.commit();
     }
+
+    public void principalFragment(FragmentActivity activity) {
+        PrincipalFragment fr = new PrincipalFragment();
+        FragmentManager fm = activity.getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_content, fr);
+        ft.commit();
+    }
 }
